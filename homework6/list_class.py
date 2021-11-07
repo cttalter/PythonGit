@@ -1,6 +1,6 @@
 class List:
-    def __init__(self, *list_source):
-        self.list0 = list(list_source)
+    def __init__(self, list_source):
+        self.list0 = list_source
 
     def index(self, index0):
         return self.list0[index0]
@@ -12,9 +12,10 @@ class List:
         return returns
 
     def __add__(self, other):
+        result_list = self.list0[:]
         for element in other.list0:
-            self.list0.append(element)
-        return self.list0
+            result_list.append(element)
+        return List(result_list)
 
     def lenth(self):
         return len(self.list0)
@@ -52,12 +53,12 @@ class List:
 
     def index_find(self, target, *index0):
         if len(index0) == 0:
-            for i in range(self.lenth(self.list0)):
+            for i in range(self.lenth()):
                 if self.list0[i] == target:
                     return i
             return 'None'
         elif len(index0) == 1:
-            for i in range(index0[0], self.lenth(self.list0)):
+            for i in range(index0[0], self.lenth()):
                 if self.list0[i] == target:
                     return i
             return 'None'
@@ -77,7 +78,26 @@ class List:
         self.list0 = new_list
 
 
-test0 = List(2, 45, 1)
-print(test0.lenth())
-test0.reserve()
+test0 = List([2, 45, 1, 3, 66, 9])
 print(test0.list0)
+print(test0.index(3))
+print(test0.cut(2, 4))
+test1 = List([99, 4])
+test2 = test1 + test0
+print(test2.list0)
+print(test2.lenth())
+print(test2.maximum())
+print(test2.minimum())
+test2.delete(3)
+print(test2.list0)
+test2.append(45)
+print(test2.list0)
+list_extend = [1, 2, 3]
+test2.extend(list_extend)
+print(test2.list0)
+print(test2.count(2))
+print(test2.index_find(2, 3, 6))
+test2.insert(3, 555)
+print(test2.list0)
+test2.reserve()
+print(test2.list0)

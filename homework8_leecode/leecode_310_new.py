@@ -2,6 +2,8 @@ import copy
 
 
 def findMinHeightTrees(n: int, edges: list[int]):
+    """find pot which only appear 1 time in edges, delete all branches including these, delete all pots from pot_list
+    do it until pot list left 1 or 2 pot, record times, that's the depth"""
     pot_list = list(range(n))
     edges_copy = copy.deepcopy(edges)
     while len(pot_list) > 2:

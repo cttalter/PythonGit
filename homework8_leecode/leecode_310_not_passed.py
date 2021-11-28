@@ -2,19 +2,22 @@ import copy
 
 
 def findMinHeightTrees(n: int, edges: list[int]):
-    height_dict = {}
+    """calculate every pot's depth, find max
+    to every pot, delete all root including it from source_list, record every another pot as next floor pot
+    record depth until source_list is empty"""
+    height_dict = {}  # record every pot's height
     for i in range(n):
-        each_height = 0
+        each_height = 0  # each_height : height of each pot
         source_list = copy.deepcopy(edges)
-        root_set = {i}
+        root_set = {i}  # hold next floor pot
         while source_list:
-            hold_list = []
+            hold_list = []  # hold root to delete from source_list
             for each_list in source_list:
                 for each_root in root_set:
                     if each_root in each_list:
                         hold_list.append(each_list)
                         break
-            root_set = set()
+            root_set = set()  # clear to hold next floor pot
             for each_list in hold_list:
                 source_list.remove(each_list)
                 root_set.update(set(each_list))
